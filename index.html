@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ahmed Noser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#FFFFFF;
+  --off:#F7F5F2;
+  --paper:#FAFAF8;
+  --ink:#0A0A0A;
+  --ink2:#1A1A1A;
+  --muted:#6B6B6B;
+  --faint:#C8C8C8;
+  --border:#E8E6E1;
+  --red:#E8230A;
+  --red2:#FF4422;
+  --orange:#FF6B2B;
+  --red-pale:#FFF1EF;
+  --red-pale2:#FFE8E4;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--white);color:var(--ink);font-family:'Outfit',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden;cursor:none;}
+
+/* CURSOR */
+#cur{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);transition:transform .15s,width .2s,height .2s;}
+#cur-o{position:fixed;width:36px;height:36px;border:1.5px solid var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);opacity:.35;transition:opacity .3s;}
+body.h #cur{width:5px;height:5px;}
+body.h #cur-o{width:56px;height:56px;opacity:.15;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.4rem 5vw;display:flex;justify-content:space-between;align-items:center;transition:background .4s,box-shadow .4s;}
+nav.s{background:rgba(255,255,255,.96);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--border);}
+.n-logo{font-family:'Anton',sans-serif;font-size:1.4rem;letter-spacing:.06em;color:var(--ink);text-decoration:none;}
+.n-logo span{color:var(--red);}
+.n-links{display:flex;gap:2.6rem;list-style:none;}
+.n-links a{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.n-links a:hover{color:var(--ink);}
+.n-hire{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.52rem 1.4rem;background:var(--red);color:#fff;text-decoration:none;transition:background .3s,transform .2s;}
+.n-hire:hover{background:var(--red2);transform:translateY(-1px);}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 5vw;padding-top:7rem;padding-bottom:4rem;background:var(--white);position:relative;overflow:hidden;}
+
+/* big decorative letter */
+.hero-deco{position:absolute;right:-2vw;top:50%;transform:translateY(-52%);font-family:'Anton',sans-serif;font-size:clamp(18rem,28vw,34rem);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(232,35,10,.06);pointer-events:none;user-select:none;letter-spacing:-.02em;}
+
+.hero-role-badge{display:inline-flex;align-items:center;gap:.7rem;margin-bottom:2.8rem;animation:up .7s ease both .1s;}
+.role-pill{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;background:var(--red-pale);color:var(--red);border:1px solid rgba(232,35,10,.18);padding:.35rem 1rem;display:inline-flex;align-items:center;gap:.6rem;}
+.role-dot{width:6px;height:6px;background:var(--red);border-radius:50%;animation:pulse 2s ease infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.25;}}
+.role-sep{width:32px;height:1px;background:var(--faint);}
+.role-year{font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--faint);letter-spacing:.12em;}
+
+.hero-name{font-family:'Anton',sans-serif;font-size:clamp(5rem,11vw,13rem);line-height:.88;letter-spacing:.01em;color:var(--ink);animation:up .8s ease both .2s;position:relative;z-index:1;}
+.hero-name .fname{display:block;}
+.hero-name .lname{display:block;color:var(--red);-webkit-text-stroke:0;}
+
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;margin-top:3.5rem;animation:up .8s ease both .35s;position:relative;z-index:1;}
+.hero-desc{font-size:1.05rem;color:var(--muted);max-width:460px;line-height:1.85;font-weight:300;}
+.hero-desc strong{color:var(--ink);font-weight:500;}
+.hero-actions{display:flex;flex-direction:column;align-items:flex-end;gap:1rem;}
+.btn-main{padding:.9rem 2.4rem;background:var(--ink);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:all .3s;position:relative;overflow:hidden;}
+.btn-main::after{content:'';position:absolute;inset:0;background:var(--red);transform:translateX(-101%);transition:transform .38s ease;}
+.btn-main:hover::after{transform:translateX(0);}
+.btn-main span{position:relative;z-index:1;}
+.btn-ghost{padding:.9rem 2.4rem;border:1.5px solid var(--border);color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:all .3s;}
+.btn-ghost:hover{border-color:var(--ink);color:var(--ink);}
+
+.hero-scroll-line{position:absolute;bottom:2.8rem;left:5vw;display:flex;align-items:center;gap:.9rem;animation:up .8s ease both .5s;}
+.hs-bar{width:1px;height:50px;background:var(--border);position:relative;overflow:hidden;}
+.hs-bar::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--red);animation:slide-down 2s ease infinite 1s;}
+@keyframes slide-down{0%{top:-100%;}100%{top:200%;}}
+.hs-txt{font-family:'IBM Plex Mono',monospace;font-size:.55rem;color:var(--faint);letter-spacing:.2em;text-transform:uppercase;writing-mode:vertical-rl;}
+
+@keyframes up{from{opacity:0;transform:translateY(32px);}to{opacity:1;transform:translateY(0);}}
+
+/* STATS BAR */
+.stats-bar{background:var(--ink);display:flex;border-top:2px solid var(--red);}
+.stat-cell{flex:1;padding:2.2rem 3rem;border-right:1px solid rgba(255,255,255,.07);transition:background .3s;}
+.stat-cell:last-child{border-right:none;}
+.stat-cell:hover{background:rgba(232,35,10,.08);}
+.stat-n{font-family:'Anton',sans-serif;font-size:2.6rem;color:#fff;letter-spacing:.03em;line-height:1;}
+.stat-n em{color:var(--red);font-style:normal;font-size:1.6rem;}
+.stat-l{font-family:'IBM Plex Mono',monospace;font-size:.58rem;color:rgba(255,255,255,.3);letter-spacing:.14em;text-transform:uppercase;margin-top:.4rem;}
+
+/* ABOUT */
+#about{background:var(--paper);padding:8rem 5vw;}
+.sec-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:1rem;margin-bottom:4rem;}
+.sec-eyebrow::before{content:attr(data-n);color:var(--faint);font-size:.9rem;font-family:'Anton',sans-serif;letter-spacing:.05em;}
+.sec-eyebrow::after{content:'';flex:1;height:1px;background:var(--border);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start;}
+.about-statement{font-family:'Anton',sans-serif;font-size:clamp(1.9rem,3vw,2.9rem);line-height:1.05;letter-spacing:.02em;color:var(--ink);margin-bottom:2rem;}
+.about-statement em{color:var(--red);font-style:normal;}
+.about-p{font-size:.94rem;color:var(--muted);line-height:2;margin-bottom:1rem;}
+.about-meta{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem 2rem;margin-top:2.8rem;padding-top:2.5rem;border-top:1px solid var(--border);}
+.m-key{font-family:'IBM Plex Mono',monospace;font-size:.57rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:.3rem;}
+.m-val{font-size:.88rem;color:var(--ink);}
+.m-val.open{color:var(--red);display:flex;align-items:center;gap:.45rem;}
+.m-val.open::before{content:'';width:6px;height:6px;background:var(--red);border-radius:50%;animation:pulse 2s ease infinite;}
+
+/* skills */
+.skills-block{}
+.sk-group{margin-bottom:2.4rem;}
+.sk-label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:1rem;}
+.sk-label::after{content:'';flex:1;height:1px;background:var(--border);}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;}
+.chip{font-family:'IBM Plex Mono',monospace;font-size:.62rem;padding:.32rem .85rem;border:1.5px solid var(--border);color:var(--ink2);background:var(--white);transition:all .22s;cursor:default;}
+.chip:hover{border-color:var(--red);color:var(--red);background:var(--red-pale);}
+
+/* PROJECTS */
+#projects{background:var(--white);padding:8rem 5vw 0;}
+
+/* featured */
+.feat{border:1.5px solid var(--border);margin-bottom:1.5px;position:relative;overflow:hidden;}
+.feat::before{content:'';position:absolute;top:0;left:0;width:4px;bottom:0;background:linear-gradient(180deg,var(--red),var(--orange));}
+.feat-inner{display:grid;grid-template-columns:1.1fr 1fr;}
+.feat-l{padding:3.5rem 3.5rem 3.5rem 4rem;border-right:1.5px solid var(--border);}
+.feat-badge{font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);background:var(--red-pale);border:1px solid rgba(232,35,10,.15);display:inline-block;padding:.28rem .9rem;margin-bottom:1.8rem;}
+.feat-title{font-family:'Anton',sans-serif;font-size:3.8rem;letter-spacing:.03em;color:var(--ink);line-height:.92;margin-bottom:.5rem;}
+.feat-sub{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--red);letter-spacing:.1em;margin-bottom:2rem;}
+.feat-p{font-size:.9rem;color:var(--muted);line-height:1.95;margin-bottom:.9rem;}
+.feat-p strong{color:var(--ink);font-weight:500;}
+.feat-tags{display:flex;flex-wrap:wrap;gap:.42rem;margin:2rem 0;}
+.ftag{font-family:'IBM Plex Mono',monospace;font-size:.58rem;padding:.22rem .7rem;background:var(--red-pale);color:var(--red);border:1px solid rgba(232,35,10,.15);}
+.feat-links{display:flex;gap:.75rem;flex-wrap:wrap;}
+.flink{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;padding:.5rem 1.2rem;border:1.5px solid var(--border);color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:all .25s;}
+.flink:hover{border-color:var(--red);color:var(--red);background:var(--red-pale);}
+.flink svg{width:11px;height:11px;}
+
+.feat-r{padding:3.5rem;background:var(--paper);}
+.r-head{font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:1.6rem;display:flex;align-items:center;gap:.8rem;}
+.r-head::after{content:'';flex:1;height:1px;background:var(--border);}
+.flow{display:flex;flex-direction:column;margin-bottom:3rem;}
+.flow-row{display:flex;gap:1.4rem;padding:1rem 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+.flow-row:last-child{border-bottom:none;}
+.flow-n{font-family:'IBM Plex Mono',monospace;font-size:.58rem;color:var(--red);min-width:20px;padding-top:.2rem;}
+.flow-t{font-size:.84rem;font-weight:500;color:var(--ink);margin-bottom:.12rem;}
+.flow-d{font-size:.75rem;color:var(--muted);line-height:1.55;}
+.feat-hl{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+.hl{background:var(--white);padding:1.15rem 1.3rem;transition:background .25s;}
+.hl:hover{background:var(--red-pale2);}
+.hl-icon{width:28px;height:28px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:.7rem;}
+.hl-icon svg{width:12px;height:12px;color:var(--red);}
+.hl-t{font-size:.8rem;font-weight:500;color:var(--ink);margin-bottom:.18rem;}
+.hl-d{font-size:.7rem;color:var(--muted);line-height:1.5;}
+
+/* project cards */
+.pcards{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--border);margin-top:1.5px;}
+.pcard{background:var(--white);padding:2.2rem;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:background .25s;}
+.pcard:hover{background:var(--paper);}
+.pcard::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--orange));transform:scaleX(0);transform-origin:left;transition:transform .4s ease;}
+.pcard:hover::after{transform:scaleX(1);}
+.pc-n{font-family:'IBM Plex Mono',monospace;font-size:.57rem;color:var(--faint);letter-spacing:.1em;margin-bottom:1.6rem;}
+.pc-title{font-family:'Anton',sans-serif;font-size:1.55rem;letter-spacing:.03em;color:var(--ink);margin-bottom:.85rem;line-height:1;}
+.pc-desc{font-size:.8rem;color:var(--muted);line-height:1.8;flex:1;margin-bottom:1.5rem;}
+.pc-chips{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1.5rem;}
+.pc-chip{font-family:'IBM Plex Mono',monospace;font-size:.55rem;padding:.17rem .55rem;background:var(--red-pale);color:var(--red);border:1px solid rgba(232,35,10,.12);}
+.pc-link{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:.45rem;transition:color .2s;margin-top:auto;}
+.pc-link:hover{color:var(--red);}
+.pc-link svg{width:11px;height:11px;}
+
+/* EDUCATION */
+#education{background:var(--paper);padding:8rem 5vw;}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;}
+.edu-col-h{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem;display:flex;align-items:center;gap:1rem;}
+.edu-col-h::after{content:'';flex:1;height:1px;background:var(--border);}
+.edu-item{padding:2rem 0;border-bottom:1px solid var(--border);}
+.edu-item:last-child{border-bottom:none;}
+.edu-period{font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--red);letter-spacing:.1em;margin-bottom:.6rem;}
+.edu-deg{font-family:'Anton',sans-serif;font-size:1.45rem;letter-spacing:.02em;color:var(--ink);margin-bottom:.3rem;line-height:1.05;}
+.edu-org{font-size:.85rem;color:var(--muted);}
+.edu-cert{display:inline-block;margin-top:.9rem;font-family:'IBM Plex Mono',monospace;font-size:.56rem;padding:.25rem .8rem;background:var(--red-pale);color:var(--red);border:1px solid rgba(232,35,10,.18);letter-spacing:.08em;text-transform:uppercase;}
+
+/* CONTACT */
+#contact{background:var(--ink);padding:9rem 5vw;text-align:center;position:relative;overflow:hidden;}
+.ct-glow{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:700px;height:400px;background:radial-gradient(ellipse,rgba(232,35,10,.07) 0%,transparent 70%);pointer-events:none;}
+.ct-label{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.8rem;}
+.ct-h{font-family:'Anton',sans-serif;font-size:clamp(3.5rem,7vw,7.5rem);line-height:.9;letter-spacing:.02em;color:#fff;margin-bottom:1.4rem;}
+.ct-h em{color:var(--red);font-style:normal;}
+.ct-p{font-size:.95rem;color:rgba(255,255,255,.35);max-width:400px;margin:0 auto 4rem;line-height:1.9;}
+.ct-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;position:relative;z-index:1;}
+.ct-link{display:flex;align-items:center;gap:.65rem;padding:.85rem 1.8rem;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:.64rem;letter-spacing:.08em;text-transform:lowercase;transition:all .3s;}
+.ct-link:hover{border-color:var(--red);color:#fff;background:rgba(232,35,10,.1);}
+.ct-link svg{width:14px;height:14px;flex-shrink:0;}
+
+/* FOOTER */
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:2rem 5vw;display:flex;justify-content:space-between;align-items:center;}
+.f-l{font-family:'IBM Plex Mono',monospace;font-size:.58rem;color:rgba(255,255,255,.18);letter-spacing:.06em;}
+.f-r{font-family:'IBM Plex Mono',monospace;font-size:.58rem;color:rgba(255,255,255,.18);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem;transition:color .2s;}
+.f-r:hover{color:var(--red);}
+
+/* REVEAL */
+.r{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.r.v{opacity:1;transform:none;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}.d4{transition-delay:.32s;}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  nav{padding:1.3rem 5vw;}
+  .n-links,.n-hire{display:none;}
+  .hero-bottom{flex-direction:column;align-items:flex-start;gap:2rem;}
+  .hero-actions{align-items:flex-start;}
+  .about-grid{grid-template-columns:1fr;gap:4rem;}
+  .feat-inner{grid-template-columns:1fr;}
+  .feat-l{border-right:none;border-bottom:1.5px solid var(--border);}
+  .pcards{grid-template-columns:1fr 1fr;}
+  .edu-grid{grid-template-columns:1fr;gap:2rem;}
+  .stats-bar{flex-wrap:wrap;}
+  .stat-cell{min-width:50%;border-right:none;border-bottom:1px solid rgba(255,255,255,.07);}
+}
+@media(max-width:600px){
+  .pcards{grid-template-columns:1fr;}
+  .hero-name{font-size:clamp(3.8rem,18vw,5rem);}
+  #contact{padding:6rem 5vw;}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-o"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="n-logo">NOSER<span>.</span></a>
+  <ul class="n-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:anoser681@gmail.com" class="n-hire">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-deco" aria-hidden="true">AN</div>
+
+  <div class="hero-role-badge">
+    <div class="role-pill">
+      <span class="role-dot"></span>
+      Backend Engineer
+    </div>
+    <div class="role-sep"></div>
+    <span class="role-year">Available · 2025</span>
+  </div>
+
+  <h1 class="hero-name">
+    <span class="fname">AHMED</span>
+    <span class="lname">NOSER</span>
+  </h1>
+
+  <div class="hero-bottom">
+    <p class="hero-desc">Building <strong>scalable APIs</strong>, clean architectures, and real-time systems that solve real problems — with a deep focus on maintainability and engineering craft.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-main"><span>View My Work</span></a>
+      <a href="#contact" class="btn-ghost">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-line">
+    <div class="hs-bar"></div>
+    <span class="hs-txt">Scroll</span>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-cell">
+    <div class="stat-n">5<em>+</em></div>
+    <div class="stat-l">Projects Shipped</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">ITI</div>
+    <div class="stat-l">Certified .NET</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">2026</div>
+    <div class="stat-l">B.Sc. Computer Sci.</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">C#</div>
+    <div class="stat-l">Primary Language</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-eyebrow" data-n="01">About Me</div>
+  <div class="about-grid">
+    <div class="r">
+      <div class="about-statement">GREAT SOFTWARE IS BUILT BY PEOPLE WHO <em>CARE.</em></div>
+      <p class="about-p">I'm a Backend Engineer from Mansoura, Egypt — wrapping up my B.Sc. in Computer & Information Sciences and a Full Stack .NET graduate of ITI. I've spent the last couple of years building systems that are clean, maintainable, and grounded in real-world needs.</p>
+      <p class="about-p">From REST APIs and Clean Architecture to real-time communication with SignalR and multi-step workflow systems — I care deeply about the quality of what I ship and the reasoning behind every design decision.</p>
+      <div class="about-meta">
+        <div><div class="m-key">Location</div><div class="m-val">Mansoura, Egypt</div></div>
+        <div><div class="m-key">Phone</div><div class="m-val">01553545334</div></div>
+        <div><div class="m-key">Email</div><div class="m-val">anoser681@gmail.com</div></div>
+        <div><div class="m-key">Status</div><div class="m-val open">Open to Work</div></div>
+      </div>
+    </div>
+    <div class="r d1 skills-block">
+      <div class="sk-group">
+        <div class="sk-label">Backend</div>
+        <div class="chips">
+          <span class="chip">C#</span><span class="chip">OOP</span><span class="chip">SOLID</span>
+          <span class="chip">ASP.NET Core</span><span class="chip">Web API</span><span class="chip">MVC</span>
+          <span class="chip">Minimal APIs</span><span class="chip">EF Core</span><span class="chip">LINQ</span>
+          <span class="chip">SQL Server</span><span class="chip">SignalR</span>
+          <span class="chip">Clean Architecture</span><span class="chip">Design Patterns</span>
+        </div>
+      </div>
+      <div class="sk-group">
+        <div class="sk-label">Frontend & Tools</div>
+        <div class="chips">
+          <span class="chip">Angular</span><span class="chip">TypeScript</span>
+          <span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span>
+          <span class="chip">Git & GitHub</span><span class="chip">Visual Studio</span><span class="chip">VS Code</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-eyebrow" data-n="02">Projects</div>
+
+  <!-- SUNNA3 -->
+  <div class="feat r">
+    <div class="feat-inner">
+      <div class="feat-l">
+        <div class="feat-badge">★ Featured Project</div>
+        <div class="feat-title">SUNNA3</div>
+        <div class="feat-sub">Maintenance Management Platform</div>
+        <p class="feat-p">We all know the frustration — you need a technician <strong>fast</strong>, but have no idea who to call or whether they're trustworthy. That gap is exactly what Sunna3 was built to close.</p>
+        <p class="feat-p">A <strong>full-stack platform</strong> connecting tenants with qualified technicians through a transparent, structured process — from raising a ticket to payment and review.</p>
+        <p class="feat-p">Features a <strong>Data Analysis Dashboard</strong> with real-time charts, and integrated <strong>AI assistance</strong> to guide tenants before ticket creation and predict maintenance alerts.</p>
+        <div class="feat-tags">
+          <span class="ftag">.NET</span><span class="ftag">Angular</span><span class="ftag">EF Core</span>
+          <span class="ftag">SQL Server</span><span class="ftag">Clean Architecture</span>
+          <span class="ftag">SignalR</span><span class="ftag">AI Models</span>
+        </div>
+        <div class="feat-links">
+          <a href="https://sunna3.vercel.app/" target="_blank" class="flink">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live Demo
+          </a>
+          <a href="https://github.com/AhmedNoser22/Sunna3" target="_blank" class="flink">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.04c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 013-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            Frontend
+          </a>
+          <a href="https://github.com/ahmedeisa10/Sunna3" target="_blank" class="flink">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.04c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 013-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            Backend
+          </a>
+        </div>
+      </div>
+      <div class="feat-r">
+        <div class="r-head">Workflow</div>
+        <div class="flow">
+          <div class="flow-row"><span class="flow-n">01</span><div><div class="flow-t">Create Maintenance Request</div><div class="flow-d">Tenant submits a ticket with AI-assisted guidance before creation</div></div></div>
+          <div class="flow-row"><span class="flow-n">02</span><div><div class="flow-t">Vendor Applications</div><div class="flow-d">Qualified vendors apply; tenant reviews profiles, ratings & history</div></div></div>
+          <div class="flow-row"><span class="flow-n">03</span><div><div class="flow-t">Assignment & Execution</div><div class="flow-d">Tenant accepts one vendor; platform auto-assigns & tracks in real time</div></div></div>
+          <div class="flow-row"><span class="flow-n">04</span><div><div class="flow-t">Secure Online Payment</div><div class="flow-d">Payment processed within the platform upon job completion</div></div></div>
+          <div class="flow-row"><span class="flow-n">05</span><div><div class="flow-t">Rate & Analytics</div><div class="flow-d">Tenant reviews; data flows into the analytics dashboard</div></div></div>
+        </div>
+        <div class="r-head">Key Features</div>
+        <div class="feat-hl">
+          <div class="hl">
+            <div class="hl-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2a10 10 0 110 20A10 10 0 0112 2zm0 0v10l6 3"/></svg></div>
+            <div class="hl-t">AI Integration</div>
+            <div class="hl-d">Pre-ticket assistant & predictive alerts</div>
+          </div>
+          <div class="hl">
+            <div class="hl-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <div class="hl-t">Analytics Dashboard</div>
+            <div class="hl-d">Real-time charts across platform activity</div>
+          </div>
+          <div class="hl">
+            <div class="hl-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+            <div class="hl-t">Role-Based Access</div>
+            <div class="hl-d">Tenant, Manager & Vendor isolated flows</div>
+          </div>
+          <div class="hl">
+            <div class="hl-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+            <div class="hl-t">Direct Support</div>
+            <div class="hl-d">Built-in escalation path to management</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARDS -->
+  <div class="pcards">
+    <div class="pcard r">
+      <div class="pc-n">02 ——</div>
+      <div class="pc-title">TELECHAT</div>
+      <p class="pc-desc">Real-time communication platform on SignalR. Video calls, voice-only calls, and call recording. Angular frontend with clean typed TypeScript integration.</p>
+      <div class="pc-chips"><span class="pc-chip">.NET</span><span class="pc-chip">SignalR</span><span class="pc-chip">Angular</span><span class="pc-chip">WebRTC</span></div>
+      <a href="https://github.com/AhmedNoser22/Telechat" target="_blank" class="pc-link">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.04c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 013-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        View Repo
+      </a>
+    </div>
+    <div class="pcard r d1">
+      <div class="pc-n">03 ——</div>
+      <div class="pc-title">QUESTAR</div>
+      <p class="pc-desc">Exam & certification platform. Live sessions, enforced time limits, instant auto-grading, detailed result breakdowns, and automatic certificate issuance on pass.</p>
+      <div class="pc-chips"><span class="pc-chip">.NET</span><span class="pc-chip">ASP.NET Core</span><span class="pc-chip">EF Core</span><span class="pc-chip">SQL Server</span></div>
+      <a href="https://github.com/AhmedNoser22/Questar" target="_blank" class="pc-link">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.04c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 013-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        View Repo
+      </a>
+    </div>
+    <div class="pcard r d2">
+      <div class="pc-n">04 ——</div>
+      <div class="pc-title">HEALTHCARE SYSTEM</div>
+      <p class="pc-desc">Liver patient management platform. Appointment scheduling, medical records, and history tracking with strict RBAC for doctors, nurses, and admins.</p>
+      <div class="pc-chips"><span class="pc-chip">.NET</span><span class="pc-chip">ASP.NET Core</span><span class="pc-chip">EF Core</span><span class="pc-chip">SQL Server</span></div>
+      <a href="https://github.com/AhmedNoser22/Liver-Disease-System" target="_blank" class="pc-link">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.04c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 013-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        View Repo
+      </a>
+    </div>
+    <div class="pcard r d3">
+      <div class="pc-n">05 ——</div>
+      <div class="pc-title">ECOM MARKETPLACE</div>
+      <p class="pc-desc">E-commerce backend for children's toy retail. Full product lifecycle: catalog, cart, order processing, payment integration, and inventory tracking via a clean RESTful API.</p>
+      <div class="pc-chips"><span class="pc-chip">.NET</span><span class="pc-chip">REST API</span><span class="pc-chip">EF Core</span><span class="pc-chip">SQL Server</span></div>
+      <a href="https://github.com/AhmedNoser22/ECom-App" target="_blank" class="pc-link">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.04c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 013-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        View Repo
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="sec-eyebrow" data-n="03">Education</div>
+  <div class="edu-grid">
+    <div class="r">
+      <div class="edu-col-h">Academic</div>
+      <div class="edu-item">
+        <div class="edu-period">2022 — 2026</div>
+        <div class="edu-deg">B.Sc. Computer & Information Sciences</div>
+        <div class="edu-org">Mansoura University · Mansoura, Egypt</div>
+      </div>
+    </div>
+    <div class="r d1">
+      <div class="edu-col-h">Professional Training</div>
+      <div class="edu-item">
+        <div class="edu-period">Jul — Sep 2025</div>
+        <div class="edu-deg">Full Stack .NET Track</div>
+        <div class="edu-org">Information Technology Institute (ITI)</div>
+        <span class="edu-cert">Certified</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="ct-glow"></div>
+  <div class="ct-label">Let's Work Together</div>
+  <div class="ct-h">GOT A<br>PROJECT?<br><em>LET'S BUILD IT.</em></div>
+  <p class="ct-p">Open to backend roles, collaborations, and interesting engineering challenges.</p>
+  <div class="ct-row">
+    <a href="mailto:anoser681@gmail.com" class="ct-link">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      anoser681@gmail.com
+    </a>
+    <a href="tel:01553545334" class="ct-link">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.19 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+      01553545334
+    </a>
+    <a href="https://www.linkedin.com/in/ahmed-noser-3363403b3" target="_blank" class="ct-link">
+      <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.554v-5.569c0-1.328-.024-3.037-1.852-3.037-1.854 0-2.137 1.446-2.137 2.94v5.666H9.352V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.284zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      linkedin
+    </a>
+    <a href="https://github.com/AhmedNoser22" target="_blank" class="ct-link">
+      <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.04c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 013-.4c1.02 0 2.04.13 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      github
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span class="f-l">© 2025 Ahmed Noser</span>
+  <a href="#hero" class="f-r">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="10" height="10"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+    Top
+  </a>
+</footer>
+
+<script>
+// Cursor
+const cur=document.getElementById('cur'),curo=document.getElementById('cur-o');
+let mx=0,my=0,ox=0,oy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function loop(){ox+=(mx-ox)*.11;oy+=(my-oy)*.11;curo.style.left=ox+'px';curo.style.top=oy+'px';requestAnimationFrame(loop);})();
+document.querySelectorAll('a,button,.chip,.pcard,.hl,.stat-cell').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('h'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('h'));
+});
+
+// Nav
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>40));
+
+// Reveal
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target);}});},{threshold:.06});
+document.querySelectorAll('.r').forEach(el=>obs.observe(el));
+
+// Stat counter animation
+function animateNum(el,target,suffix=''){
+  const isText=isNaN(parseInt(target));
+  if(isText){el.innerHTML=target;return;}
+  let start=0,end=parseInt(target),dur=1200,step=dur/end;
+  const t=setInterval(()=>{start++;el.innerHTML=start+(suffix||'');if(start>=end)clearInterval(t);},step);
+}
+const statObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      const nums=e.target.querySelectorAll('.stat-n');
+      nums.forEach(n=>{
+        const txt=n.textContent.trim();
+        const em=n.querySelector('em');
+        if(em){
+          const v=parseInt(txt);
+          if(!isNaN(v)){animateNum(n,v,'');setTimeout(()=>{n.innerHTML=n.innerHTML+(em?em.outerHTML:'');},1200);}
+        }
+      });
+      statObs.unobserve(e.target);
+    }
+  });
+},{threshold:.5});
+const bar=document.querySelector('.stats-bar');
+if(bar)statObs.observe(bar);
+</script>
+</body>
+</html>
