@@ -266,6 +266,16 @@ footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.06);padding:
   #contact{padding:6rem 5vw;}
   .hero-photo-wrap{width:clamp(160px,60vw,240px);}
 }
+
+/* Project Details Modal */
+.project-modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:99999;padding:20px}
+.project-modal.active{display:flex;animation:fadeIn .35s ease}
+.project-box{background:#fff;max-width:850px;width:100%;max-height:85vh;overflow:auto;padding:30px;border-radius:16px;animation:slideUp .4s ease}
+.project-close{float:right;border:none;background:#E8230A;color:#fff;padding:10px 14px;cursor:pointer}
+.project-trigger{cursor:pointer}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+
 </style>
 </head>
 <body>
@@ -485,8 +495,53 @@ function animateText(id, text, baseDelay) {
     el.appendChild(s);
   });
 }
-animateText('fname', 'AHMED', 0.3);
-animateText('lname', 'NOSER', 0.75);
+animateText('fname', 'Ahmed', 0.3);
+animateText('lname', 'Noser', 0.75);
 </script>
+
+<div id="projectModal" class="project-modal">
+  <div class="project-box">
+    <button class="project-close" onclick="closeProject()">Close</button>
+    <div id="projectContent"></div>
+  </div>
+</div>
+
+<script>
+const projectDetails={
+  syano:{
+    title:"Syano Chat App",
+    content:`<h2>Syano Chat App</h2>
+    <p>Real-time chat platform built for fast and secure communication.</p>
+    <ul>
+      <li>Instant messaging using WebSockets.</li>
+      <li>Authentication & authorization system.</li>
+      <li>Group chats, private chats and notifications.</li>
+      <li>Scalable backend architecture with clean API design.</li>
+      <li>Optimized database queries and performance monitoring.</li>
+    </ul>`
+  },
+  oustar:{
+    title:"Oustar",
+    content:`<h2>Oustar Platform</h2>
+    <p>Modern service and management platform focused on reliability and user experience.</p>
+    <ul>
+      <li>Advanced dashboard and analytics.</li>
+      <li>Role-based access control.</li>
+      <li>RESTful APIs and scalable backend services.</li>
+      <li>Automation workflows and reporting tools.</li>
+      <li>Responsive user experience with smooth interactions.</li>
+    </ul>`
+  }
+};
+
+function openProject(key){
+  document.getElementById('projectContent').innerHTML = projectDetails[key].content;
+  document.getElementById('projectModal').classList.add('active');
+}
+function closeProject(){
+  document.getElementById('projectModal').classList.remove('active');
+}
+</script>
+
 </body>
 </html>
