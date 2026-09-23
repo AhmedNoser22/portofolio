@@ -55,8 +55,6 @@ nav.s{background:rgba(21,16,17,.88);backdrop-filter:blur(18px);box-shadow:0 1px 
 
 /* HERO */
 #hero{min-height:100vh;display:grid;grid-template-columns:1fr auto;align-items:center;padding:0 5vw;padding-top:7rem;padding-bottom:4rem;background:var(--bg);position:relative;overflow:hidden;gap:5vw;}
-#hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:80px 80px;opacity:0;animation:gridFadeIn 1.4s ease .5s forwards;pointer-events:none;}
-@keyframes gridFadeIn{to{opacity:.5;}}
 .blob{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:0;}
 .blob-a{width:420px;height:420px;background:radial-gradient(circle,rgba(207,42,68,.28),transparent 70%);top:-120px;right:8vw;animation:drift 16s ease-in-out infinite;}
 .blob-b{width:320px;height:320px;background:radial-gradient(circle,rgba(255,80,104,.16),transparent 70%);bottom:-60px;left:6vw;animation:drift 20s ease-in-out infinite reverse;}
@@ -105,19 +103,12 @@ nav.s{background:rgba(21,16,17,.88);backdrop-filter:blur(18px);box-shadow:0 1px 
 .orbit-wrap.o2{inset:26px;animation:spinRev 24s linear infinite;}
 .orbit-wrap.o2 .dot{width:5px;height:5px;background:var(--ink);box-shadow:0 0 8px 1px rgba(247,242,238,.5);}
 
-.photo-frame{position:relative;overflow:hidden;z-index:1;background:var(--bg3);}
+.photo-frame{position:relative;overflow:hidden;z-index:1;background:var(--bg3);border-radius:6px;}
 .photo-frame img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;filter:contrast(1.05) saturate(.96);transition:transform .6s ease;}
 .photo-frame:hover img{transform:scale(1.03);}
 .photo-frame::after{content:'';position:absolute;bottom:0;left:0;right:0;height:38%;background:linear-gradient(to top,rgba(207,42,68,.22),transparent);pointer-events:none;}
 
-.corner{position:absolute;width:22px;height:22px;border-color:var(--red2);border-style:solid;z-index:2;}
-.c-tl{top:-1px;left:-1px;border-width:2.5px 0 0 2.5px;animation:cornerIn .5s ease both 1.2s;}
-.c-tr{top:-1px;right:-1px;border-width:2.5px 2.5px 0 0;animation:cornerIn .5s ease both 1.3s;}
-.c-bl{bottom:-1px;left:-1px;border-width:0 0 2.5px 2.5px;animation:cornerIn .5s ease both 1.4s;}
-.c-br{bottom:-1px;right:-1px;border-width:0 2.5px 2.5px 0;animation:cornerIn .5s ease both 1.5s;}
-@keyframes cornerIn{from{opacity:0;transform:scale(0);}to{opacity:1;transform:none;}}
-
-.photo-accent-line{position:absolute;top:1rem;right:-1rem;bottom:-1rem;left:1rem;background:linear-gradient(135deg,var(--red-pale2),var(--red-pale));z-index:-1;animation:accentSlide 1s ease both .6s;}
+.photo-accent-line{position:absolute;top:1rem;right:-1rem;bottom:-1rem;left:1rem;background:linear-gradient(135deg,var(--red-pale2),var(--red-pale));z-index:-1;border-radius:6px;animation:accentSlide 1s ease both .6s;}
 @keyframes accentSlide{from{opacity:0;transform:translate(10px,10px);}to{opacity:1;transform:none;}}
 
 .spin-badge{position:absolute;bottom:-26px;left:-26px;width:108px;height:108px;z-index:5;animation:up .8s ease both 1.6s;}
@@ -184,7 +175,10 @@ nav.s{background:rgba(21,16,17,.88);backdrop-filter:blur(18px);box-shadow:0 1px 
 .feat::before{content:'';position:absolute;top:0;left:0;width:4px;bottom:0;background:linear-gradient(180deg,var(--red),var(--red2));}
 .feat-inner{display:grid;grid-template-columns:1.1fr 1fr;}
 .feat-l{padding:3.5rem 3.5rem 3.5rem 4rem;border-right:1.5px solid var(--border);}
-.feat-badge{font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red2);background:var(--red-pale);border:1px solid rgba(207,42,68,.28);display:inline-block;padding:.28rem .9rem;margin-bottom:1.8rem;}
+.feat-badge{font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red2);background:var(--red-pale);border:1px solid rgba(207,42,68,.28);display:inline-flex;align-items:center;gap:.5rem;padding:.28rem .9rem;margin-bottom:1.8rem;}
+.feat-badge .fb-dot{width:6px;height:6px;border-radius:50%;background:var(--red2);animation:pulse 2s ease infinite;}
+.feat-badge.team{color:var(--ink-dim);background:var(--bg3);border-color:var(--border2);}
+.feat-badge.team .fb-dot{background:var(--ink-dim);}
 .feat-title{font-family:'Anton',sans-serif;font-size:3.6rem;letter-spacing:.03em;color:var(--ink);line-height:.92;margin-bottom:.5rem;}
 .feat-sub{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--red2);letter-spacing:.1em;margin-bottom:2rem;}
 .feat-p{font-size:.9rem;color:var(--ink-dim);line-height:1.95;margin-bottom:.9rem;}
@@ -281,8 +275,7 @@ footer{background:var(--deep);border-top:1px solid rgba(247,242,238,.06);padding
   .feat-l{border-right:none;border-bottom:1.5px solid var(--border);}
   .pcards{grid-template-columns:1fr 1fr;}
   .edu-grid{grid-template-columns:1fr;gap:3rem;}
-  .stats-bar{flex-wrap:wrap;}
-  .stat-cell{min-width:50%;border-right:none;border-bottom:1px solid rgba(247,242,238,.06);}
+  .stat-cell{padding:1.6rem 1.2rem;}
 }
 @media(max-width:600px){
   .pcards{grid-template-columns:1fr;}
@@ -295,6 +288,9 @@ footer{background:var(--deep);border-top:1px solid rgba(247,242,238,.06);padding
   .feat-l{padding:2.4rem 1.6rem;}
   .feat-r{padding:2.4rem 1.6rem;}
   .feat-hl{grid-template-columns:1fr;}
+  .stat-cell{padding:1.2rem .6rem;}
+  .stat-n{font-size:1.7rem;}
+  .stat-l{font-size:.5rem;letter-spacing:.08em;}
 }
 </style>
 </head>
@@ -352,10 +348,6 @@ footer{background:var(--deep);border-top:1px solid rgba(247,242,238,.06);padding
     <div class="photo-accent-line"></div>
     <div class="photo-frame">
       <img src="profile.jpg" alt="Ahmed Noser" />
-      <div class="corner c-tl"></div>
-      <div class="corner c-tr"></div>
-      <div class="corner c-bl"></div>
-      <div class="corner c-br"></div>
     </div>
 
     <div class="spin-badge">
@@ -375,7 +367,6 @@ footer{background:var(--deep);border-top:1px solid rgba(247,242,238,.06);padding
 </section>
 
 <div class="stats-bar">
-  <div class="stat-cell"><div class="stat-n">7<em>+</em></div><div class="stat-l">Projects Shipped</div></div>
   <div class="stat-cell"><div class="stat-n">ITI</div><div class="stat-l">Certified .NET</div></div>
   <div class="stat-cell"><div class="stat-n">2026</div><div class="stat-l">B.Sc. Computer Sci.</div></div>
   <div class="stat-cell"><div class="stat-n">C#</div><div class="stat-l">Primary Language</div></div>
@@ -464,7 +455,7 @@ footer{background:var(--deep);border-top:1px solid rgba(247,242,238,.06);padding
   <div class="feat r">
     <div class="feat-inner">
       <div class="feat-l">
-        <div class="feat-badge">★ Featured Project</div>
+        <div class="feat-badge"><span class="fb-dot"></span>Featured Project</div>
         <div class="feat-title">SARD</div>
         <div class="feat-sub">سرد — Social Platform for Writers &amp; Readers</div>
         <p class="feat-p">Sard is a <strong>social platform for writers and readers</strong>, combining publishing, communities, real-time interaction, and AI models for writing assistance and content improvement.</p>
@@ -516,7 +507,7 @@ footer{background:var(--deep);border-top:1px solid rgba(247,242,238,.06);padding
   <div class="feat r">
     <div class="feat-inner">
       <div class="feat-l">
-        <div class="feat-badge">★ Featured Project</div>
+        <div class="feat-badge"><span class="fb-dot"></span>Featured Project</div>
         <div class="feat-title">TRADESPHERE</div>
         <div class="feat-sub">ERP for Import &amp; Distribution</div>
         <p class="feat-p">TradeSphere is an <strong>ERP backend</strong> for an import and distribution company — it tracks goods from the moment a purchase is agreed with a supplier through shipping, customs clearance, quality inspection, warehousing, sale, delivery, and financial settlement on both ends.</p>
@@ -558,7 +549,7 @@ footer{background:var(--deep);border-top:1px solid rgba(247,242,238,.06);padding
   <div class="feat r">
     <div class="feat-inner">
       <div class="feat-l">
-        <div class="feat-badge">★ Featured Project</div>
+        <div class="feat-badge"><span class="fb-dot"></span>Featured Project</div>
         <div class="feat-title">DEVMENTOR</div>
         <div class="feat-sub">AI Interview, Exam &amp; Certification Platform</div>
         <p class="feat-p">DevMentor is an <strong>AI-driven platform</strong> for technical interview practice, timed exams, and verifiable certificates across .NET, Angular, SQL, and System Design tracks.</p>
@@ -606,13 +597,13 @@ footer{background:var(--deep);border-top:1px solid rgba(247,242,238,.06);padding
   <div class="feat r">
     <div class="feat-inner">
       <div class="feat-l">
-        <div class="feat-badge">★ Featured Project</div>
+        <div class="feat-badge team"><span class="fb-dot"></span>Team Collaboration — Sunna3</div>
         <div class="feat-title">SUNNA3</div>
         <div class="feat-sub">Maintenance Management Platform</div>
         <p class="feat-p">We all know the frustration — you need a technician <strong>fast</strong>, but have no idea who to call or whether they're trustworthy. That gap is exactly what Sunna3 was built to close.</p>
         <p class="feat-p">A <strong>full-stack platform</strong> connecting tenants with qualified technicians through a transparent, structured process — from raising a ticket to payment and review.</p>
         <p class="feat-p">Features a <strong>Data Analysis Dashboard</strong> with real-time charts, and integrated <strong>AI assistance</strong> to guide tenants before ticket creation and predict maintenance alerts.</p>
-        <p class="feat-p">Built with a teammate as a two-person project — we split the frontend and backend work between us over the course of development.</p>
+        <p class="feat-p">Built with a teammate as a two-person project, on the Sunna3 team only — we split the frontend and backend work between us over the course of development.</p>
         <div class="feat-tags">
           <span class="ftag">.NET</span><span class="ftag">Angular</span><span class="ftag">EF Core</span>
           <span class="ftag">SQL Server</span><span class="ftag">Clean Architecture</span>
