@@ -43,13 +43,10 @@ body.h #cur-o{width:56px;height:56px;opacity:.15;}
 @keyframes slideDown{0%{top:-100%;}100%{top:200%;}}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.4rem 5vw;display:flex;justify-content:space-between;align-items:center;transition:background .4s,box-shadow .4s;}
-nav.s{background:rgba(21,16,17,.88);backdrop-filter:blur(18px);box-shadow:0 1px 0 var(--border);}
-.n-logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
-.n-logo-mark{width:36px;height:36px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:.85rem;letter-spacing:.02em;color:var(--ink);position:relative;transition:border-color .25s;}
-.n-logo-mark::after{content:'';position:absolute;bottom:-1.5px;right:-1.5px;width:7px;height:7px;background:var(--red2);}
-.n-logo:hover .n-logo-mark{border-color:var(--red2);}
-.n-logo-role{font-family:'IBM Plex Mono',monospace;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);}
+nav{position:sticky;top:0;left:0;right:0;z-index:500;padding:1.4rem 5vw;display:flex;justify-content:space-between;align-items:center;transition:background .4s,box-shadow .4s;}
+nav.s{background:rgba(21,16,17,.96);box-shadow:0 1px 0 var(--border);}
+.n-logo{font-family:'Anton',sans-serif;font-size:1.35rem;letter-spacing:.06em;color:var(--ink);text-decoration:none;}
+.n-logo span{color:var(--red2);}
 .n-links{display:flex;gap:2.5rem;list-style:none;}
 .n-links a{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none;transition:color .2s;}
 .n-links a:hover{color:var(--ink);}
@@ -273,7 +270,8 @@ footer{background:var(--deep);border-top:1px solid rgba(247,242,238,.06);padding
   #hero{grid-template-columns:1fr;grid-template-rows:auto auto;align-items:start;padding-top:6rem;gap:0;}
   .hero-left{order:1;}
   .hero-photo-wrap{display:block;order:2;width:clamp(180px,55vw,300px);margin:3rem auto 1.5rem;}
-  .n-links,.n-hire,.n-logo-role{display:none;}
+  .n-links{display:none;}
+  .n-hire{padding:.55rem 1.1rem;font-size:.58rem;}
   .hero-bottom{flex-direction:column;align-items:flex-start;gap:2rem;}
   .hero-actions{align-items:flex-start;}
   .about-grid{grid-template-columns:1fr;gap:4rem;}
@@ -306,10 +304,7 @@ footer{background:var(--deep);border-top:1px solid rgba(247,242,238,.06);padding
 <div id="cur-o"></div>
 
 <nav id="nav">
-  <a href="#" class="n-logo">
-    <span class="n-logo-mark">AN</span>
-    <span class="n-logo-role">Backend Eng.</span>
-  </a>
+  <a href="#" class="n-logo">AN<span>.</span></a>
   <ul class="n-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
