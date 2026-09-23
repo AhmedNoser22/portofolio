@@ -45,8 +45,11 @@ body.h #cur-o{width:56px;height:56px;opacity:.15;}
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.4rem 5vw;display:flex;justify-content:space-between;align-items:center;transition:background .4s,box-shadow .4s;}
 nav.s{background:rgba(21,16,17,.88);backdrop-filter:blur(18px);box-shadow:0 1px 0 var(--border);}
-.n-logo{font-family:'Anton',sans-serif;font-size:1.35rem;letter-spacing:.06em;color:var(--ink);text-decoration:none;}
-.n-logo span{color:var(--red2);}
+.n-logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
+.n-logo-mark{width:36px;height:36px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:.85rem;letter-spacing:.02em;color:var(--ink);position:relative;transition:border-color .25s;}
+.n-logo-mark::after{content:'';position:absolute;bottom:-1.5px;right:-1.5px;width:7px;height:7px;background:var(--red2);}
+.n-logo:hover .n-logo-mark{border-color:var(--red2);}
+.n-logo-role{font-family:'IBM Plex Mono',monospace;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);}
 .n-links{display:flex;gap:2.5rem;list-style:none;}
 .n-links a{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none;transition:color .2s;}
 .n-links a:hover{color:var(--ink);}
@@ -55,6 +58,8 @@ nav.s{background:rgba(21,16,17,.88);backdrop-filter:blur(18px);box-shadow:0 1px 
 
 /* HERO */
 #hero{min-height:100vh;display:grid;grid-template-columns:1fr auto;align-items:center;padding:0 5vw;padding-top:7rem;padding-bottom:4rem;background:var(--bg);position:relative;overflow:hidden;gap:5vw;}
+#hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(var(--border2) 1px,transparent 1px);background-size:30px 30px;opacity:0;mask-image:radial-gradient(ellipse 60% 55% at 78% 42%,#000 0%,transparent 72%);-webkit-mask-image:radial-gradient(ellipse 60% 55% at 78% 42%,#000 0%,transparent 72%);animation:gridFadeIn 1.6s ease .5s forwards;pointer-events:none;}
+@keyframes gridFadeIn{to{opacity:.5;}}
 .blob{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:0;}
 .blob-a{width:420px;height:420px;background:radial-gradient(circle,rgba(207,42,68,.28),transparent 70%);top:-120px;right:8vw;animation:drift 16s ease-in-out infinite;}
 .blob-b{width:320px;height:320px;background:radial-gradient(circle,rgba(255,80,104,.16),transparent 70%);bottom:-60px;left:6vw;animation:drift 20s ease-in-out infinite reverse;}
@@ -136,7 +141,9 @@ nav.s{background:rgba(21,16,17,.88);backdrop-filter:blur(18px);box-shadow:0 1px 
 /* SECTION EYEBROW (spinning glyph motif) */
 .sec-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--red2);display:flex;align-items:center;gap:1rem;margin-bottom:3.6rem;}
 .sec-eyebrow .n{color:var(--ink-faint);font-size:.9rem;font-family:'Anton',sans-serif;letter-spacing:.05em;}
-.sec-eyebrow .spinner{width:9px;height:9px;flex-shrink:0;border-radius:50%;border:1.5px solid var(--red2);border-top-color:transparent;border-left-color:transparent;animation:spin 3s linear infinite;}
+.sec-eyebrow .spinner{width:6px;height:6px;flex-shrink:0;border-radius:50%;background:var(--red2);position:relative;}
+.sec-eyebrow .spinner::after{content:'';position:absolute;inset:-5px;border:1px solid var(--red2);border-radius:50%;opacity:.55;animation:ringPulse 2.4s ease-out infinite;}
+@keyframes ringPulse{0%{transform:scale(.6);opacity:.6;}100%{transform:scale(2);opacity:0;}}
 .sec-eyebrow::after{content:'';flex:1;height:1px;background:var(--border);}
 
 /* ABOUT */
@@ -156,7 +163,7 @@ nav.s{background:rgba(21,16,17,.88);backdrop-filter:blur(18px);box-shadow:0 1px 
 .approach-item{background:var(--bg3);border:1px solid var(--border);padding:1.4rem 1.5rem;transition:border-color .25s,background .25s;}
 .approach-item:hover{border-color:rgba(207,42,68,.4);background:var(--red-pale);}
 .approach-h{display:flex;align-items:center;gap:.7rem;margin-bottom:.5rem;}
-.approach-mark{width:16px;height:16px;flex-shrink:0;border-radius:50%;border:2px solid var(--red2);border-top-color:transparent;border-left-color:transparent;animation:spin 4s linear infinite;}
+.approach-mark{width:8px;height:8px;flex-shrink:0;background:var(--red2);transform:rotate(45deg);}
 .approach-t{font-family:'Outfit',sans-serif;font-weight:500;font-size:.92rem;color:var(--ink);}
 .approach-d{font-size:.8rem;color:var(--ink-dim);line-height:1.7;}
 
@@ -266,7 +273,7 @@ footer{background:var(--deep);border-top:1px solid rgba(247,242,238,.06);padding
   #hero{grid-template-columns:1fr;grid-template-rows:auto auto;align-items:start;padding-top:6rem;gap:0;}
   .hero-left{order:1;}
   .hero-photo-wrap{display:block;order:2;width:clamp(180px,55vw,300px);margin:3rem auto 1.5rem;}
-  .n-links,.n-hire{display:none;}
+  .n-links,.n-hire,.n-logo-role{display:none;}
   .hero-bottom{flex-direction:column;align-items:flex-start;gap:2rem;}
   .hero-actions{align-items:flex-start;}
   .about-grid{grid-template-columns:1fr;gap:4rem;}
@@ -299,7 +306,10 @@ footer{background:var(--deep);border-top:1px solid rgba(247,242,238,.06);padding
 <div id="cur-o"></div>
 
 <nav id="nav">
-  <a href="#" class="n-logo">NOSER<span>.</span></a>
+  <a href="#" class="n-logo">
+    <span class="n-logo-mark">AN</span>
+    <span class="n-logo-role">Backend Eng.</span>
+  </a>
   <ul class="n-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
